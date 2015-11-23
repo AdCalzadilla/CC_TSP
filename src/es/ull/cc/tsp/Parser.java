@@ -57,7 +57,7 @@ public class Parser {
 				}
 			}
 			
-			theMatrix.printMatrix();
+			//theMatrix.printMatrix();
 			
 			
 		} catch (ParserConfigurationException | SAXException | IOException e) {

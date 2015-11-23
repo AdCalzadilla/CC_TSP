@@ -80,4 +80,8 @@ public class Matrix {
 	public void setValue(int row, int col, double val){
 		_matrix[row][col] = val;
 	}
+
+	public double getValue(int i, int j) {
+		return _matrix[i][j];
+	}
 }
