@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class HeightLimit {
 	
 	static final double INIT = 1e100;
+	static final double INFINITE = Double.MAX_VALUE;
 	
 	private Matrix _matrix;
 	private ArrayList<Integer> _tour;
@@ -16,21 +17,26 @@ public class HeightLimit {
 		load();
 	}
 
+	/**
+	 * Start with the height limit.
+	 */
 	public void load() {
-		calcHightLimit();
+		calcHeightLimit();
 	}
 
-	private void calcHightLimit() {
+	private void calcHeightLimit() {
 		NN();
 		two_OPT();
 	}
 
 	private void NN() {
 		boolean visited[] = new boolean[getMatrix().getRows()];
-		double near = Double.MAX_VALUE;
+		double near = INFINITE;
 		int initNode = (int) (Math.random() * getMatrix().getRows());
 		int actual = initNode;
+		//int actual = 0;
 		int tempNum = actual;
+		_tour.add(actual);
 		visited[actual]= true;
 		
 		while(!allVisited(visited)){
@@ -44,7 +50,7 @@ public class HeightLimit {
 				}
 			}
 			actual = tempNum;
-			near = Double.MAX_VALUE;
+			near = INFINITE;
 			_tour.add(actual);
 			visited[actual] = true;
 		}
@@ -67,18 +73,27 @@ public class HeightLimit {
 	
 	private void two_OPT() {
 		boolean improvement = true;
+		boolean go_start;
 		double tempValue = 0.0;
 		ArrayList<Integer> tempTour = _tour;
+		setBestValue(calculateTotalDistance(getTour()));
+		
 		while(improvement){
-			setBestValue(calculateTotalDistance(getTour()));
+			go_start = false;
 			for(int i=0; i < _tour.size()-1;i++){
+				if(go_start){
+					break;
+				}
 				for(int k= i+1; k < _tour.size(); k++){
 					tempTour = two_OPTSwap(tempTour, i, k);
 					tempValue = calculateTotalDistance(tempTour);
 					if(tempValue < getBestValue()){
 						setBestValue(tempValue);
+						tempValue = 0.0;
 						_tour = tempTour;
+						tempTour = _tour;
 						improvement = true;
+						go_start = true;
 						break;
 					}
 					else{
@@ -90,7 +105,6 @@ public class HeightLimit {
 		}
 		
 	}
-	
 	
 	private double calculateTotalDistance(ArrayList<Integer> tour) {
 		double result = 0.0;
@@ -114,9 +128,6 @@ public class HeightLimit {
 		return true;
 	}
 
-	/**
-	 * @param bestValue the bestValue to set
-	 */
 	private void setBestValue(double bestValue) {
 		_bestValue = bestValue;
 		
@@ -141,6 +152,15 @@ public class HeightLimit {
 	 */
 	public ArrayList<Integer> getTour() {
 		return _tour;
+	}
+	
+	/**
+	 * Print the _tour.
+	 */
+	public void printTour(){
+		for(int i=0; i<getTour().size();i++){
+			System.out.print(_tour.get(i)+" ");
+		}
 	}
 
 	/**
