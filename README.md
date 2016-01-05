@@ -27,3 +27,7 @@ Para ello se elaborará una clase que tenga las siguientes características:
 3. Debe guardar el mejor **valor** obtenido hasta el momento para el tour almacenado.
 
 La clase debe contener un método de carga para cargar una entrada determinada, cada vez que se invoque al método de carga debe eliminarse el tour almacenado e iniciarse la cota superior a 1E100; un método de computación de cota superior, el cual llamará a dos métodos privados para implementar primero un algoritmo constructivo (**NN algoritm**), y un algoritmo de refinamiento (**2 OPT**). Una vez ejecutado el método de computación de la cota superior se actualizará el mejor tour encontrado, así como el valor de la cota superior; por último, se debe incluir un método para la obtención del valor de la cota superior.
+
+### Paso3: Árbol de ramificación
+
+Usar un algoritmo de *ramificación y poda* para conseguir una solución del problema del viajante de comercio (**TSP**).
