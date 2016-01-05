@@ -31,3 +31,7 @@ La clase debe contener un método de carga para cargar una entrada determinada, 
 ### Paso3: Árbol de ramificación
 
 Usar un algoritmo de *ramificación y poda* para conseguir una solución del problema del viajante de comercio (**TSP**).
+
+## Enlace gitHub
+
+[Repositorio de la práctica](https://github.com/AdCalzadilla/CC_TSP).
